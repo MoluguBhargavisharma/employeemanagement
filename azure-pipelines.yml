@@ -17,6 +17,16 @@ steps:
   displayName: 'dotnet build $(buildConfiguration)'
 - task: DotNetCoreCLI@2
   inputs:
+- task: AzureRmWebAppDeployment@4
+  inputs:
+    ConnectionType: 'AzureRM'
+    azureSubscription: 'Free Trial(0cef5883-3e58-4841-b4f3-f835db69fb75)'
+    appType: 'webApp'
+    WebAppName: 'azurewebapppp1'
+    deployToSlotOrASE: true
+    ResourceGroupName: 'devops'
+    SlotName: 'production'
+    packageForLinux: '$(System.DefaultWorkingDirectory)/**/*.zip'
     command: 'publish'
     publishWebProjects: true
 - task: AzureWebApp@1
